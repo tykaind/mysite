@@ -10,8 +10,8 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-<link href="./assets/css/mysite.css" rel="stylesheet" type="text/css">
-<link href="./assets/css/user.css" rel="stylesheet" type="text/css">
+<link href="/mysite/assets/css/mysite.css" rel="stylesheet" type="text/css">
+<link href="/mysite/assets/css/user.css" rel="stylesheet" type="text/css">
 
 </head>
 <body>
@@ -58,21 +58,19 @@
 							<div class="form-group">
 								<label class="form-text" for="input-pass">비밀번호</label> <input type="password" id="input-pass" name="pw" value="" placeholder="비밀번호를 입력하세요">
 							</div>
-							
+
 							<%-- <% 
 							if("fail".equals(result)) {
 							%> --%>
 							<c:choose>
 								<c:when test="${param.result == 'fail'}">
-									<p>
-										로그인에 실패했습니다. 다시 로그인해 주세요.
-									</p>
+									<p>로그인에 실패했습니다.</p>
 								</c:when>
 							</c:choose>
 							<%-- <% 
 							}
 							%> --%>
-							
+
 							<!-- 버튼영역 -->
 							<div class="button-area">
 								<button type="submit" id="btn-submit">로그인</button>
