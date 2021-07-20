@@ -10,7 +10,6 @@ import com.javaex.vo.UserVo;
 
 public class UserDao {
 
-	// Field
 	Connection conn = null;
 	PreparedStatement pstmt = null;
 	ResultSet rs = null;
@@ -48,7 +47,6 @@ public class UserDao {
 
 	}
 
-	// UserInsert
 	public int userInsert(UserVo userVo) {
 		int count = -1;
 		getConnection();
@@ -72,12 +70,11 @@ public class UserDao {
 		close();
 		return count;
 	}
-	
-	//UserUpdate
+
 	public int userUpdate(UserVo userVo) {
 		int count = -1;
 		getConnection();
-		
+
 		try {
 			String query = "";
 			query += " update users ";
@@ -101,7 +98,6 @@ public class UserDao {
 		return count;
 	}
 
-	// Select 1 User
 	public UserVo getUser(String id, String pw) {
 
 		UserVo userVo = null;
@@ -132,13 +128,12 @@ public class UserDao {
 		close();
 		return userVo;
 	}
-	
-	// Select 1 User Info
+
 	public UserVo getUserInfo(int userNo) {
-		
+
 		UserVo userVo = null;
 		getConnection();
-		
+
 		try {
 			String query = "";
 			query += " select no, id, password, name, gender";
@@ -146,7 +141,7 @@ public class UserDao {
 			query += " where no = ? ";
 			pstmt = conn.prepareStatement(query);
 			pstmt.setInt(1, userNo);
-			
+
 			rs = pstmt.executeQuery();
 			while (rs.next()) {
 				int no = rs.getInt("no");
@@ -154,7 +149,7 @@ public class UserDao {
 				String password = rs.getString("password");
 				String name = rs.getString("name");
 				String gender = rs.getString("gender");
-				
+
 				userVo = new UserVo(no, id, password, name, gender);
 			}
 		} catch (SQLException e) {
@@ -163,12 +158,5 @@ public class UserDao {
 		close();
 		return userVo;
 	}
-	
-//	//Update
-//	public int userUpdate(UserVo userVo) {
-//		
-//		int count = -1;
-//		
-//	}
 
 }

@@ -12,7 +12,6 @@ import com.javaex.vo.BoardVo;
 
 public class BoardDao {
 
-	// Field
 	Connection conn = null;
 	PreparedStatement pstmt = null;
 	ResultSet rs = null;
@@ -22,7 +21,7 @@ public class BoardDao {
 	String id = "webdb";
 	String pw = "webdb";
 
-	// Get Connection
+
 	private void getConnection() {
 		try {
 			// 1. JDBC 드라이버 (Oracle) 로딩
@@ -37,7 +36,6 @@ public class BoardDao {
 		}
 	}
 
-	// Get Close
 	private void close() {
 		try {
 			if (pstmt != null) {
@@ -52,10 +50,8 @@ public class BoardDao {
 
 	}
 
-	// SelectAll 리스트
 	public List<BoardVo> getList() {
 
-		// DB에서 리스트 가져옴
 		List<BoardVo> arrayList = new ArrayList<BoardVo>();
 
 		getConnection();
@@ -102,7 +98,6 @@ public class BoardDao {
 
 	}
 
-	// Insert 등록
 	public int boardInsert(BoardVo boardVo) {
 		int count = -1;
 		getConnection();
@@ -127,59 +122,7 @@ public class BoardDao {
 		close();
 		return count;
 	}
-
-	// Search 기능
-	public List<BoardVo> boardSearch(String search) {
-
-		// DB에서 리스트 가져옴
-		List<BoardVo> arrayList = new ArrayList<BoardVo>();
-
-		getConnection();
-
-		try {
-
-			String query = "";
-			query += " select b_no, ";
-			query += "		  no, ";
-			query += "        title, ";
-			query += "        content, ";
-			query += "        hit, ";
-			query += "        reg_date, ";
-			query += "        user_no, ";
-			query += "        name ";
-			query += " From users us left outer join board bo on us.no = bo.user_no ";
-			query += " where name like '%" + search + "%'";
-			query += " or title like '%" + search + "%'";
-			query += " or content like '%" + search + "%'";
-			query += " or b_no like '%" + search + "%'";
-			query += " order by b_no desc";
-			
-			pstmt = conn.prepareStatement(query);
-			rs = pstmt.executeQuery();
-
-			while (rs.next()) {
-				int b_no = rs.getInt("b_no");
-				int no = rs.getInt("no");
-				String title = rs.getString("title");
-				String content = rs.getString("content");
-				int hit = rs.getInt("hit");
-				String reg_date = rs.getString("reg_date");
-				int user_no = rs.getInt("user_no");
-				String name = rs.getString("name");
-
-				BoardVo boardVo = new BoardVo(no, b_no, title, content, hit, reg_date, user_no, name);
-
-				arrayList.add(boardVo);
-			}
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
-		close();
-		return arrayList;
-	}
 	
-	
-	// SelectOne 기능
 	public BoardVo getBoardInfo(int no) {
 
 		BoardVo boardVo = null;
@@ -222,8 +165,7 @@ public class BoardDao {
 		return boardVo;
 
 	}
-	
-	//Delete
+
 	public int boardDelete(int no) {
 		
 		int count = 0;
@@ -244,8 +186,7 @@ public class BoardDao {
 		close();
 		return count;
 	}
-	
-	//Modify
+
 	public int boardUpdate(BoardVo boardVo) {
 		int count = -1;
 		getConnection();
@@ -271,7 +212,6 @@ public class BoardDao {
 		return count;
 	}
 	
-	//Add Hit
 	public void addHit(int no) {
 		
 		getConnection();

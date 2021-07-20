@@ -29,7 +29,7 @@ public class UserController extends HttpServlet {
 			WebUtil.forward(request, response, "/WEB-INF/views/user/joinForm.jsp");
 		} else if ("join".equals(action)) {
 			System.out.println("[회원가입]");
-			
+
 			String id = request.getParameter("id");
 			String pw = request.getParameter("pw");
 			String name = request.getParameter("name");
@@ -53,63 +53,62 @@ public class UserController extends HttpServlet {
 
 			String id = request.getParameter("id");
 			String pw = request.getParameter("pw");
-			
+
 			UserDao userDao = new UserDao();
 			UserVo userVo = userDao.getUser(id, pw);
-			
-			if(userVo != null) {
+
+			if (userVo != null) {
 				System.out.println("로그인 성공");
 
 				HttpSession session = request.getSession();
 				session.setAttribute("authUser", userVo);
-				
+
 				WebUtil.redirect(request, response, "./main");
-			} else { 
+			} else {
 				System.out.println("로그인 실패");
 
 				WebUtil.redirect(request, response, "./user?action=loginForm&result=fail");
 
 			}
-			
-			
+
 		} else if ("logout".equals(action)) {
 			System.out.println("[로그아웃]");
-			
+
 			HttpSession session = request.getSession();
 			session.removeAttribute("authUser");
 			session.invalidate();
-			
+
 			WebUtil.redirect(request, response, "./main");
 		} else if ("modifyForm".equals(action)) {
-			
+
 			HttpSession session = request.getSession();
 			UserVo authUser = (UserVo) session.getAttribute("authUser");
-			
-			if(authUser != null) {
+
+			if (authUser != null) {
 				UserDao userDao = new UserDao();
 				UserVo userVo = userDao.getUserInfo(authUser.getNo());
 				request.setAttribute("userVo", userVo);
-				
+
 				WebUtil.forward(request, response, "/WEB-INF/views/user/modifyForm.jsp");
 			} else {
 				WebUtil.redirect(request, response, "./user?action=loginForm");
 			}
 		} else if ("update".equals(action)) {
-			
+
 			UserDao userDao = new UserDao();
-			int no = Integer.parseInt(request.getParameter("no")) ;
+			int no = Integer.parseInt(request.getParameter("no"));
 			String id = request.getParameter("id");
 			String password = request.getParameter("pw");
 			String name = request.getParameter("name");
-			String gender= request.getParameter("gender");
-			
+			String gender = request.getParameter("gender");
+
 			UserVo userVo = new UserVo(no, password, name, gender);
 			userDao.userUpdate(userVo);
-			
+
 			HttpSession session = request.getSession();
-			
-			((UserVo)session.getAttribute("authUser")).setName(name);
-			
+
+			((UserVo) session.getAttribute("authUser")).setName(name);
+
 			WebUtil.redirect(request, response, "./main");
 		}
 

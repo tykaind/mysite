@@ -12,7 +12,6 @@ import com.javaex.vo.GuestbookVo;
 
 public class GuestbookDao {
 
-	//Field
 		Connection conn = null;
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
@@ -88,8 +87,6 @@ public class GuestbookDao {
 			return arrayList;
 		}
 		
-		//Insert
-		
 		public int guestbookInsert(GuestbookVo guestbookVo) {
 			int count = -1;
 
@@ -114,8 +111,6 @@ public class GuestbookDao {
 			close();
 			return count;
 		}
-		
-		//Delete
 		
 		public int guestbookDelete(GuestbookVo g) {
 			int count = -1;
