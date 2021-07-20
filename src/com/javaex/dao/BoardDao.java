@@ -67,8 +67,8 @@ public class BoardDao {
 			query += "		  reg_date, ";
 			query += " 		  user_no, ";
 			query += " 		  name ";
-			query += " from users u, board b ";
-			query += " where u.no = b.user_no ";
+			query += " from users u join board b ";
+			query += " on u.no = b.user_no ";
 
 			pstmt = conn.prepareStatement(query);
 			rs = pstmt.executeQuery();
