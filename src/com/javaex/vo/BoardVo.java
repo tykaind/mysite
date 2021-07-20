@@ -2,7 +2,6 @@ package com.javaex.vo;
 
 public class BoardVo {
 	
-	//Field
 	private int no;
 	private int b_no;
 	private String title;
@@ -11,12 +10,8 @@ public class BoardVo {
 	private String reg_date;
 	private int user_no;
 	private String name;
-	
-	//Constructor
 
-	public BoardVo() {
-
-	}
+	public BoardVo() {}
 	
 	public BoardVo(int no, int b_no) {
 		this.no = no;
@@ -65,8 +60,6 @@ public class BoardVo {
 		this.user_no = user_no;
 		this.name = name;
 	}
-
-	//Method - G/S
 	
 	public String getTitle() {
 		return title;
@@ -131,8 +124,6 @@ public class BoardVo {
 	public void setB_no(int b_no) {
 		this.b_no = b_no;
 	}
-
-	//Method - Ordinary
 	
 	@Override
 	public String toString() {
