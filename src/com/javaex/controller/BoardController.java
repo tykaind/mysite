@@ -95,7 +95,7 @@ public class BoardController extends HttpServlet {
 
 			WebUtil.forward(request, response, "/WEB-INF/views/board/modifyForm.jsp");
 		} else if ("modify".equals(action)) {
-			System.out.println("[게시물수정폼]");
+			System.out.println("[게시물수정]");
 
 			HttpSession session = request.getSession();
 			UserVo authUser = (UserVo) session.getAttribute("authUser");
